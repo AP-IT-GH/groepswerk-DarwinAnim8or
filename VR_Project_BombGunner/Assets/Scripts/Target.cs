@@ -6,10 +6,13 @@ public class Target : MonoBehaviour
 {
     public float maxLeftPosition;
     public float maxRightPosition;
-    private int speed = 5;
+    private float speed;
     private int direction = 1;
 
-    // Update is called once per frame
+    void Start() {
+        speed = Random.Range(2.0f, 6.0f);
+    }
+
     void Update()
     {
         if ((transform.position.z > maxRightPosition) || (transform.position.z < maxLeftPosition)){
