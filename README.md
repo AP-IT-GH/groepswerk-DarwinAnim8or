@@ -1,7 +1,6 @@
 # Onepager take 2
 
-## Duck hunt VR
-Link to GitHub: https://github.com/AP-IT-GH/groepswerk-DarwinAnim8or/ 
+## Shooting Gallery VR
 Groep: Bert Van Itterbeeck, Gianni Selleslagh , Vanommeslaeghe Gie , Slabbinck Siemen, Bavo  Debraekeleer ,Jorik Van Looke
 ### De player:
 De player schiet op de targets die random verschijnen. Hij heeft telkens 10 kogels en moet zo snel mogelijk zo veel mogelijk targets raken. 
