@@ -107,3 +107,7 @@ crashlytics-build.properties
 VR_Project_BombGunner/.vscode/
 
 VR_Project_BombGunner/Library/
+
+VR_Project_BombGunner/Temp/
+
+VR_Project_BombGunner/UserSettings/EditorUserSettings.asset
