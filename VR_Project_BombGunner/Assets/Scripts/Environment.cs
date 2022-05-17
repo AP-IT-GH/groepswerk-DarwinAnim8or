@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
-    public Target targetPrefab;
+    public Targetmove targetPrefab;
 
     // Update is called once per frame
     void Update()
     {
         if (GameObject.FindWithTag("Target") == null){
-            Target target = Instantiate(targetPrefab);
+            Targetmove target = Instantiate(targetPrefab);
             Debug.Log("spawn");
         }
     }
