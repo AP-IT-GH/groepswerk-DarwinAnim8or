@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        rb.velocity = transform.TransformDirection(new Vector3(-30f, 0, 0));
+        rb.velocity = transform.TransformDirection(new Vector3(-60f, 0, 0));
         //transform.position += new Vector3(-0 * Time.deltaTime, 0 , 0);
     }
 
