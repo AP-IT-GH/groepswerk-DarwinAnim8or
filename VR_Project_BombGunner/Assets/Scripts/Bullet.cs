@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-             float timeSinceInitialization = Time.timeSinceLevelLoad - initializationTime;
+        float timeSinceInitialization = Time.timeSinceLevelLoad - initializationTime;
 
         rb.velocity = transform.TransformDirection(new Vector3(-60f, 0, 0));
         if (timeSinceInitialization > 2){
