@@ -9,38 +9,31 @@ public class AgentShooter : Agent
 {
     public Transform Target;
     public GameObject myprefab;
+    private List<GameObject> bullets = new List<GameObject>();
     public Transform self;
-    private bool shot;
-    private int countdown;
     public override void OnEpisodeBegin()
     {
         if (this.transform.localPosition.y < 45 || this.transform.localPosition.y > 75 || this.transform.localPosition.x > -30 || this.transform.localPosition.x < -155)
         {
             this.transform.localPosition = new Vector3(-83, 60, -45);
             this.transform.localRotation = Quaternion.identity;
-            
         }
 
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("bullet");
-        if (gameObjects != null)
+        foreach (var bull in bullets)
         {
-            for (int i = 0; i > gameObjects.Length; i++)
-            {
-                Destroy(gameObjects[i]);
-            }
+            Debug.Log("BULLET DESTROYED");
+            Destroy(bull, .5f);
         }
 
-        this.countdown = 0;
         //self.position = new Vector3(-83, 60, -45);
-        
-        // verplaats de target naar een nieuwe willekeurige locatie 
-        //Target.localPosition = new Vector3(Target.localPosition.x - Random.value, Target.localPosition.y, Random.value * 8 - 4);
+
+        // verplaats de target naar een nieuwe willekeurige locatie 
+        //Target.localPosition = new Vector3(Target.localPosition.x - Random.value, Target.localPosition.y, Random.value * 8 - 4);
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         // Agent positie
-        sensor.AddObservation(this.transform.localPosition);
         sensor.AddObservation(this.transform.localRotation);
 
     }
@@ -53,20 +46,16 @@ public class AgentShooter : Agent
         // Acties, size = 2  
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = actionBuffers.ContinuousActions[0];
-        controlSignal.y = actionBuffers.ContinuousActions[1];
+        //controlSignal.y = actionBuffers.ContinuousActions[1];
 
-        //transform.Translate(controlSignal * speedMultiplier);
-        transform.Rotate(rotationMultiplier * actionBuffers.ContinuousActions[0], 0.0f, 0.0f);
+        transform.Translate(controlSignal * speedMultiplier);
+        //transform.Rotate(rotationMultiplier * 0.0f, actionBuffers.ContinuousActions[0], 0.0f);
 
-        if (actionBuffers.ContinuousActions[2] == 1)
+        if (actionBuffers.ContinuousActions[1] == 1)
         {
-            Debug.Log(countdown);
-            if (countdown < 3)
-            {
-                shootProjectile();
-                SetReward(0.1f);
-                countdown++;
-            }
+            shootProjectile();
+            SetReward(0.1f);
+            
         }
         
         if (this.transform.localPosition.y < 45 || this.transform.localPosition.y > 75 || this.transform.localPosition.x > -30 || this.transform.localPosition.x < -155)
@@ -85,9 +74,13 @@ public class AgentShooter : Agent
                 Debug.Log("HIT!");
                 SetReward(1.0f); EndEpisode();
             }
-            if (bullet.transform.position.z > 100)
+            if (bullet.transform.position.x > 100 || bullet.transform.position.y > 100 || bullet.transform.position.z > 100)
             {
-                Destroy(bullet);
+                Debug.Log("Destory episode end");
+                foreach (var bull in bullets)
+                {
+                    Destroy(bull, .5f);
+                }
                 EndEpisode();
             }
         }
@@ -98,19 +91,17 @@ public class AgentShooter : Agent
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
         continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[2] = Input.GetKey(KeyCode.Space) ? 1 : 0;
+        continuousActionsOut[1] = Input.GetKey(KeyCode.Space) ? 1 : 0;
         //var discreteActionsOut = actionsOut.DiscreteActions;
         //discreteActionsOut[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
     }
     public void shootProjectile()
     {
         var prefab = Instantiate(myprefab, new Vector3(self.localPosition.x, self.localPosition.y, self.localPosition.z), new Quaternion(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z, this.transform.rotation.w));
-        prefab.GetComponent<Rigidbody>().AddForce(0, 0, 2000);
+        prefab.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 2000);
+        bullets.Add(prefab);
     }
-
-
 
 
 }

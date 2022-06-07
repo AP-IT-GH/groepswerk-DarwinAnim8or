@@ -1,0 +1,49 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1654248985",
+        "python_version": "3.9.2 (tags/v3.9.2:1a79785, Feb 19 2021, 13:44:55) [MSC v.1928 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\selle\\AppData\\Roaming\\Python\\Python39\\Scripts\\mlagents-learn config/Shooter.yaml --run-id=Test32 --resume",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.20.1",
+        "end_time_seconds": "1654248991"
+    },
+    "total": 5.841778000000001,
+    "count": 1,
+    "self": 0.00894630000000074,
+    "children": {
+        "run_training.setup": {
+            "total": 0.11092689999999994,
+            "count": 1,
+            "self": 0.11092689999999994
+        },
+        "TrainerController.start_learning": {
+            "total": 5.7219048,
+            "count": 1,
+            "self": 8.829999999981908e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 5.5820138,
+                    "count": 1,
+                    "self": 5.5820138
+                },
+                "TrainerController._save_models": {
+                    "total": 0.13980269999999972,
+                    "count": 1,
+                    "self": 0.008498699999999637,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.1313040000000001,
+                            "count": 1,
+                            "self": 0.1313040000000001
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
