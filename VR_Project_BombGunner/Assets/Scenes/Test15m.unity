@@ -956,7 +956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233380891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103.2, y: 60.7, z: 52.8}
+  m_LocalPosition: {x: -145, y: 60.7, z: 52.8}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -979,7 +979,6 @@ GameObject:
   - component: {fileID: 1574546541}
   - component: {fileID: 1574546540}
   - component: {fileID: 1574546539}
-  - component: {fileID: 1574546542}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -1080,7 +1079,7 @@ MonoBehaviour:
   m_SensorName: RaySensorUp
   m_DetectableTags:
   - target
-  m_RaysPerDirection: 10
+  m_RaysPerDirection: 3
   m_MaxRayDegrees: 50
   m_SphereCastRadius: 0.17
   m_RayLength: 20
@@ -1127,33 +1126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
---- !u!114 &1574546542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574546534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: RaySensorDown
-  m_DetectableTags:
-  - target
-  m_RaysPerDirection: 10
-  m_MaxRayDegrees: 50
-  m_SphereCastRadius: 0.17
-  m_RayLength: 20
-  m_RayLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967291
-  m_ObservationStacks: 1
-  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 0
-  m_EndVerticalOffset: -1
 --- !u!54 &1574546543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1192,7 +1164,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 285d1fdd09cd1cb459e0b8747d5b82cb, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Shooter

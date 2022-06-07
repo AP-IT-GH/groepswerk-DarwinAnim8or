@@ -4,11 +4,13 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
+using System;
 
 public class AgentShooter : Agent
 {
     public Transform Target;
     public GameObject myprefab;
+    private System.Random rand = new System.Random();
     private List<GameObject> bullets = new List<GameObject>();
     public Transform self;
     public override void OnEpisodeBegin()
@@ -21,14 +23,13 @@ public class AgentShooter : Agent
 
         foreach (var bull in bullets)
         {
-            Debug.Log("BULLET DESTROYED");
             Destroy(bull, .5f);
         }
 
         //self.position = new Vector3(-83, 60, -45);
 
         // verplaats de target naar een nieuwe willekeurige locatie 
-        //Target.localPosition = new Vector3(Target.localPosition.x - Random.value, Target.localPosition.y, Random.value * 8 - 4);
+        Target.localPosition = new Vector3((float)rand.Next(-140, -25), Target.localPosition.y, Target.localPosition.z);
     }
 
     public override void CollectObservations(VectorSensor sensor)
