@@ -8,7 +8,7 @@ using System;
 
 public class AgentShooter : Agent
 {
-    public Transform Target;
+    public GameObject[] myTargets;
     public GameObject myprefab;
     private System.Random rand = new System.Random();
     private List<GameObject> bullets = new List<GameObject>();
@@ -17,25 +17,36 @@ public class AgentShooter : Agent
     {
         if (this.transform.localPosition.y < 45 || this.transform.localPosition.y > 75 || this.transform.localPosition.x > -30 || this.transform.localPosition.x < -155)
         {
-            this.transform.localPosition = new Vector3(-83, 60, -45);
+            this.transform.localPosition = new Vector3(0, 2, 0);
             this.transform.localRotation = Quaternion.identity;
         }
+<<<<<<< Updated upstream
 
         foreach (var bull in bullets)
+=======
+        myTargets = GameObject.FindGameObjectsWithTag("Target");
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("bullet");
+        if (gameObjects != null)
+>>>>>>> Stashed changes
         {
             Destroy(bull, .5f);
         }
 
+<<<<<<< Updated upstream
         //self.position = new Vector3(-83, 60, -45);
 
         // verplaats de target naar een nieuwe willekeurige locatie 
         Target.localPosition = new Vector3((float)rand.Next(-140, -25), Target.localPosition.y, Target.localPosition.z);
+=======
+        this.countdown = 0;
+>>>>>>> Stashed changes
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         // Agent positie
         sensor.AddObservation(this.transform.localRotation);
+        sensor.AddObservation(this.shot);
 
     }
 
@@ -52,14 +63,22 @@ public class AgentShooter : Agent
         transform.Translate(controlSignal * speedMultiplier);
         //transform.Rotate(rotationMultiplier * 0.0f, actionBuffers.ContinuousActions[0], 0.0f);
 
+<<<<<<< Updated upstream
         if (actionBuffers.ContinuousActions[1] == 1)
         {
             shootProjectile();
             SetReward(0.1f);
             
+=======
+        if (actionBuffers.ContinuousActions[2] >= 1)
+        {
+                shot = true;
+                shootProjectile();
+                SetReward(0.1f);
+>>>>>>> Stashed changes
         }
         
-        if (this.transform.localPosition.y < 45 || this.transform.localPosition.y > 75 || this.transform.localPosition.x > -30 || this.transform.localPosition.x < -155)
+        if (this.transform.localPosition.y < 0 || this.transform.localPosition.y > 5 || this.transform.localPosition.x < -3 || this.transform.localPosition.x < 3)
         {
             SetReward(-1f);
             EndEpisode();
@@ -68,12 +87,13 @@ public class AgentShooter : Agent
         {
 
             GameObject bullet = GameObject.FindGameObjectWithTag("bullet");
-            float distanceToTarget = Vector3.Distance(bullet.transform.position, Target.localPosition);
+            float distanceToTarget = Vector3.Distance(bullet.transform.position, myTargets[1].transform.localPosition);
             // target bereikt   
             if (distanceToTarget < 10f)
             {
                 Debug.Log("HIT!");
-                SetReward(1.0f); EndEpisode();
+                SetReward(1.0f); 
+                EndEpisode();
             }
             if (bullet.transform.position.x > 100 || bullet.transform.position.y > 100 || bullet.transform.position.z > 100)
             {
@@ -99,9 +119,19 @@ public class AgentShooter : Agent
     }
     public void shootProjectile()
     {
+<<<<<<< Updated upstream
         var prefab = Instantiate(myprefab, new Vector3(self.localPosition.x, self.localPosition.y, self.localPosition.z), new Quaternion(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z, this.transform.rotation.w));
         prefab.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 2000);
         bullets.Add(prefab);
+=======
+        if (shot)
+        {
+            SetReward(10.0f);
+            var prefab = Instantiate(myprefab, new Vector3(self.localPosition.x, self.localPosition.y, self.localPosition.z), new Quaternion(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z, this.transform.rotation.w));
+            prefab.GetComponent<Rigidbody>().AddForce(0, 0, 2000);
+            shot = false;
+        } 
+>>>>>>> Stashed changes
     }
 
 
